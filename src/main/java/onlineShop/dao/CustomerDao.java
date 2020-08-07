@@ -22,17 +22,17 @@ public class CustomerDao {
 
 	public void addCustomer(Customer customer) {
 		customer.getUser().setEnabled(true);
-
+		//give a authority to this user
 		Authorities authorities = new Authorities();
 		authorities.setAuthorities("ROLE_USER");
 		authorities.setEmailId(customer.getUser().getEmailId());
-
+		//give a cart to this user
 		Cart cart = new Cart();
 		cart.setCustomer(customer);
 		customer.setCart(cart);
 		
 		Session session = null;
-
+		//use hibernate to save this user
 		try {
 			session = sessionFactory.openSession();
 			session.beginTransaction();
